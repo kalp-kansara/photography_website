@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Index</title>
+    </h:head>
+    <h:body onload="myFunction()">
+
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="Include/header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div id = "cupcake" class = "box">
+            <span class = "letter">D</span>
+
+            <div class = "cupcakeCircle box">
+                <div class = "cupcakeInner box">
+                    <div class = "cupcakeCore box"></div>
+
+                </div></div>
+
+            <span class = "letter box">W</span>
+        </div>
+
+        <div id="myDiv">
+            <!-- Sidebar/menu -->
+            <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br />
+                <h3 class="w3-padding-64 w3-center">
+                    <div id = "cupcake" class = "box">
+                        <span class = "letter" style="font-size: 60px">D</span>
+
+                        <div class = "cupcakeCircle box" style="height: 60px;width: 60px;">
+                            <div class = "cupcakeInner box">
+                                <div class = "cupcakeCore box"></div>
+
+                            </div>
+                        </div>
+                        <span class = "letter box" style="font-size: 60px">W</span>
+                    </div>
+                </h3>
+                <h:form>
+                    <p:commandLink value="Logout" action="#{loginBean.logout()}" />
+                </h:form>
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+                <a href="index.xhtml" class="w3-bar-item w3-button">Home</a>
+                <a href="" class="w3-bar-item w3-button">User</a>
+                <a href="photocategory.xhtml" class="w3-bar-item w3-button">Category</a>
+                <a href="contest.xhtml" class="w3-bar-item w3-button">Contest</a>
+                <a href="plans.xhtml" class="w3-bar-item w3-button">Plans</a>
+                <a href="photographeroftheweek.xhtml" class="w3-bar-item w3-button">Image Of Week</a>
+                <a href="tips.xhtml" class="w3-bar-item w3-button">Tips</a>
+                
+                
+                <!--<a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>-->
+            </nav>
+
+            <!-- Top menu on small screens -->
+            <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+                <span class="w3-left w3-padding"><img src="DOW1.png" height="200px" width="250px" /></span>
+                <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+            </header>
+
+            <!-- Overlay effect when opening sidebar on small screens -->
+            <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+            <!-- !PAGE CONTENT! -->
+            <div class="w3-main" style="margin-left:300px">
+
+                <!-- Push down content on small screens -->
+                <div class="w3-hide-large" style="margin-top:83px"></div>
+
+                <!-- Photo grid -->
+                <div class="w3-row">
+                    <div class="w3-third">
+                        <img src="../../User/Upload/AllUserPhotos/nature1.jpg" style="width:100%;" onclick="onClick(this)" alt="A boy surrounded by beautiful nature" />
+                        <img src="../../User/Upload/AllUserPhotos/nature2.jpg" style="width:100%;" onclick="onClick(this)" alt="What a beautiful scenery this sunset" />
+                        <img src="../../User/Upload/AllUserPhotos/nature3.jpg" style="width:100%;" onclick="onClick(this)" alt="The Beach. Me. Alone. Beautiful" />
+                    </div>
+
+                    <div class="w3-third">
+                        <img src="../../User/Upload/AllUserPhotos/nature1.jpg" style="width:100%;" onclick="onClick(this)" alt="A boy surrounded by beautiful nature" />
+                        <img src="../../User/Upload/AllUserPhotos/nature2.jpg" style="width:100%;" onclick="onClick(this)" alt="What a beautiful scenery this sunset" />
+                        <img src="../../User/Upload/AllUserPhotos/nature3.jpg" style="width:100%;" onclick="onClick(this)" alt="The Beach. Me. Alone. Beautiful" />
+                    </div>
+
+                    <div class="w3-third">
+                        <img src="../../User/Upload/AllUserPhotos/nature1.jpg" style="width:100%;" onclick="onClick(this)" alt="A boy surrounded by beautiful nature" />
+                        <img src="../../User/Upload/AllUserPhotos/nature2.jpg" style="width:100%;" onclick="onClick(this)" alt="What a beautiful scenery this sunset" />
+                        <img src="../../User/Upload/AllUserPhotos/nature3.jpg" style="width:100%;" onclick="onClick(this)" alt="The Beach. Me. Alone. Beautiful" />
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="w3-center w3-padding-32">
+                    <div class="w3-bar">
+                        <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+                        <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+                        <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+                        <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+                        <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+                        <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+                    </div>
+                </div>
+
+                <!-- Modal for full size images on click-->
+                <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display = 'none'">
+                    <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+                    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+                        <img id="img01" class="w3-image" />
+                        <p id="caption"></p>
+                    </div>
+                </div>
+
+                <!-- End page content -->
+            </div>
+        </div>
+
+        <script>
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+                document.getElementById("cupcake").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="Include/footer.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>
+

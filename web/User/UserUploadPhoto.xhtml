@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h:form enctype="multipart/form-data">
+            <h:outputLabel value="CategoryId" />
+            <h:inputText value="#{testBEAN.categoryId}" />
+            <h:outputLabel value="UserId" />
+            <h:inputText value="#{testBEAN.userId}" />
+            <h:outputLabel value="Description" />
+            <h:inputText value="#{testBEAN.photoDescription}" />
+            <h:outputLabel value="Is Approve" />
+            <h:inputText value="#{testBEAN.isApprove}" />
+            <h:outputLabel value="Photo " />
+            <h:inputFile value="#{testBEAN.file}" />
+            
+            <h:commandButton action="#{testBEAN.addUserUploadPhoto()}" value="Add"/>
+        </h:form>
+    </h:body>
+</html>
+

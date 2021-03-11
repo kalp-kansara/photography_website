@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="Include/Header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <h:form id="temp">
+            <div id="content">
+                <div class="body-container container-fluid">
+                    <a class="menu-btn" href="javascript:void(0)">
+                        <i class="ion ion-grid"></i>
+                    </a>
+                    <div class="row justify-content-center">
+                        <!--=================== side menu ====================-->
+                        <div class="col-lg-2 col-md-3 col-12 menu_block" style="width: 15%">
+
+                            <!--logo -->
+                            <div class="logo_box">
+                                <a href="#">
+                                    <img src="assets/img/logo.png" alt="cocoon" />
+                                </a>
+                            </div>
+                            <!--logo end-->
+
+                            <!--main menu -->
+                            <div class="side_menu_section">
+                                <ul class="menu_nav">
+                                    <li class="active">
+                                        <a href="index.xhtml">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <!--                                <li>
+                                                                        <a href="services.html">
+                                                                            Services
+                                                                        </a>
+                                                                    </li>-->
+                                    <li>
+                                        <a href="portfolio.xhtml">
+                                            Portfolio
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="contest.xhtml">
+                                            Contest
+                                        </a>
+                                    </li>
+                                    <!--                                <li>
+                                                                        <a href="blog.html">
+                                                                            Blog
+                                                                        </a>
+                                                                    </li>-->
+                                    <!--                                <li>
+                                                                        <a href="contact.html">
+                                                                            Contact
+                                                                        </a>
+                                                                    </li>-->
+                                </ul>
+                            </div>
+                            <!--main menu end -->
+
+                            <!--                        filter menu -->
+                            <div class="side_menu_section">
+                                <h4 class="side_title">filter by:</h4>
+                                <ul  id="filtr-container"  class="filter_nav">
+                                    <li data-filter=".Running" class="active">
+                                        <h:commandLink action="#{contestBEAN.getContestbyStatus('running')}" value="Running"></h:commandLink>                                       
+                                    </li>
+                                    <li data-filter=".Over">
+                                        <h:commandLink action="#{contestBEAN.getcontestbystatus('over')}" value="Over"></h:commandLink>
+                                    </li>
+                                    <li data-filter=".UpComing">
+                                        <h:commandLink action="#{contestBEAN.getcontestbystatus('upcoming')}" value="Up Coming"></h:commandLink>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!--filter menu end -->
+
+                            <!--social and copyright -->
+                            <div class="side_menu_bottom">
+                                <div class="side_menu_bottom_inner">
+                                </div>
+                            </div>
+                            <!--social and copyright end -->
+                        </div>
+                        <!--=================== side menu end====================-->
+                        <!--=================== content body ====================-->
+                        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+                        <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
+                            <div>
+                                <!--=================== image card start here  (has two section left and right )====================-->
+
+                                <div class="img_card">
+
+                                    <!--                                        <h:commandLink id="paidbtn" value="Paid" class="btn btn-primary" style="margin-right: 20px;" >
+                                                                                <f:ajax  event="click" render="temp"  listener="#{contestBEAN.getContestByContestType('paid')}" />
+                                                                            </h:commandLink>
+                                                                            <h:commandLink id="unpaidbtn" value="Unpaid" class="btn btn-primary" style="margin-right: 20px;">
+                                                                                <f:ajax event="click" render="temp" listener="#{contestBEAN.getContestByContestType('unpaid')}" />
+                                                                            </h:commandLink>-->
+
+                                    <h:selectOneMenu id="status" value="#{contestBEAN.status}" style="width: 400px;margin-right: 30px;position: relative;display: inline-block;vertical-align: middle;height: 50px" >
+                                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                                        <f:selectItem itemLabel="Runing" itemValue="runing"/>
+                                        <f:selectItem itemLabel="Over" itemValue="over"/>
+                                        <f:selectItem itemLabel="Up Coming" itemValue="upcoming"/>
+                                    </h:selectOneMenu>
+                                    <h:selectOneMenu id="type" value="#{contestBEAN.contestType}" style="width: 400px;margin-right: 30px;position: relative;display: inline-block;vertical-align: middle;  height: 50px">
+                                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                                        <f:selectItem itemLabel="Paid" itemValue="paid"/>
+                                        <f:selectItem itemLabel="Unpaid" itemValue="unpaid"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton value="Search" class="btn btn-primary" style="width: 200px" action="#{contestBEAN.contestbystatusandtype(contestBEAN.status,contestBEAN.contestType)}"/>
+
+
+                                    <div class="row justify-content-center">
+
+<!--                                            <ui:repeat var="item" value="#{contestBEAN.getContestbyStatus('over')}">
+
+                                                <div class="col-md-6 col-7 content_section">
+                                                    <div class="content_box">
+                                                        <div class="content_box_inner">
+                                                            <div class="row justify-content-center">
+                                                                =================== services boxes start here  ====================
+                                                                <div class="col-md-3 col-12">
+                                                                    <div class="img_box_one text-left">
+                                                                        <img src="assets/img/icons/typo.png" alt="services icon" />
+                                                                        <h5>
+                                                                            <h:outputText value="#{item.contestType}"/>
+                                                                        </h5>
+                                                                        <div class="content">
+
+                                                                            <p>
+                                                                                <h:outputText value="#{item.contestType}" id="name"/>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-12">
+                                                                    <div class="img_box_one text-left">
+                                                                        <img src="assets/img/icons/satelite.png" alt="services icon" />
+                                                                        <div class="content">
+                                                                            <h5>
+                                                                                <h:outputText value="#{item.contestName}"/>
+                                                                            </h5>
+                                                                            <p>
+                                                                                <h:outputText value="#{item.contestName}"/>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-12">
+                                                                    <div class="img_box_one text-left">
+                                                                        <img src="Upload/Icon/cal.png" alt="services icon" />
+                                                                        <div class="content">
+                                                                            <h5>
+                                                                                <h:outputText value="#{item.startDate}"/><br/>
+                                                                                <h:outputText value="#{item.endDate}"/>
+                                                                            </h5>
+                                                                            <p>
+                                                                                Start Date : <h:outputText value="#{item.startDate}"> <f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText><br/>
+                                                                                End Date : <h:outputText value="#{item.endDate}"><f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-12">
+                                                                    <div class="img_box_one text-left">
+                                                                        <button value="REGISTRATION" name="REGISTRATION" class="btn btn-primary"  style="width: 500px">REGISTRATION</button>
+                                                                    </div>
+                                                                </div>
+                                                                =================== services boxes end here  ====================
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-5 img_section" style="background-image: url('Upload/Contest/#{item.contestPhotoPath}');"></div>
+                                                <div class="col-md-12 col-12" style="height: 20px"></div>
+                                            </ui:repeat>-->
+
+
+                                           <c:if test="${empty param['Status'] and empty param['ContestType']}">
+                                                <ui:repeat var="item" value="#{contestBEAN.getContestbyStatus('runing')}">
+
+                                                    <div class="col-md-6 col-7 content_section">
+                                                        <div class="content_box">
+                                                            <div class="content_box_inner">
+                                                                <div class="row justify-content-center">
+                                                                    =================== services boxes start here  ====================
+                                                                    <div class="col-md-3 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="assets/img/icons/typo.png" alt="services icon" />
+                                                                            <h5>
+                                                                                <h:outputText value="#{item.contestType}"/>
+                                                                            </h5>
+                                                                            <div class="content">
+
+                                                                                <p>
+                                                                                    <h:outputText value="#{item.contestType}" id="name"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="assets/img/icons/satelite.png" alt="services icon" />
+                                                                            <div class="content">
+                                                                                <h5>
+                                                                                    <h:outputText value="#{item.contestName}"/>
+                                                                                </h5>
+                                                                                <p>
+                                                                                    <h:outputText value="#{item.contestName}"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="Upload/Icon/cal.png" alt="services icon" />
+                                                                            <div class="content">
+                                                                                <h5>
+                                                                                    <h:outputText value="#{item.startDate}"/><br/>
+                                                                                    <h:outputText value="#{item.endDate}"/>
+                                                                                </h5>
+                                                                                <p>
+                                                                                    Start Date : <h:outputText value="#{item.startDate}"> <f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText><br/>
+                                                                                    End Date : <h:outputText value="#{item.endDate}"><f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <button value="REGISTRATION" name="REGISTRATION" class="btn btn-primary"  style="width: 500px">REGISTRATION</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    =================== services boxes end here  ====================
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-5 img_section" style="background-image: url('Upload/Contest/#{item.contestPhotoPath}');"></div>
+                                                    <div class="col-md-12 col-12" style="height: 20px"></div>
+                                                </ui:repeat>
+                                            </c:if> 
+
+                                                                                    
+                                            <c:if test="${not empty param['Status'] and not empty param['ContestType']}">
+                                                <ui:repeat var="item" value="#{contestBEAN.contestbystatusandtype(param['Status'], param['ContestType'])}">
+
+                                                    <div class="col-md-6 col-7 content_section">
+                                                        <div class="content_box">
+                                                            <div class="content_box_inner">
+                                                                <div class="row justify-content-center">
+                                                                    =================== services boxes start here  ====================
+                                                                    <div class="col-md-3 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="assets/img/icons/typo.png" alt="services icon" />
+                                                                            <h5>
+                                                                                <h:outputText value="#{item.contestType}"/>
+                                                                            </h5>
+                                                                            <div class="content">
+
+                                                                                <p>
+                                                                                    <h:outputText value="#{item.contestType}" id="name"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="assets/img/icons/satelite.png" alt="services icon" />
+                                                                            <div class="content">
+                                                                                <h5>
+                                                                                    <h:outputText value="#{item.contestName}"/>
+                                                                                </h5>
+                                                                                <p>
+                                                                                    <h:outputText value="#{item.contestName}"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <img src="Upload/Icon/cal.png" alt="services icon" />
+                                                                            <div class="content">
+                                                                                <h5>
+                                                                                    <h:outputText value="#{item.startDate}"/><br/>
+                                                                                    <h:outputText value="#{item.endDate}"/>
+                                                                                </h5>
+                                                                                <p>
+                                                                                    Start Date : <h:outputText value="#{item.startDate}"> <f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText><br/>
+                                                                                    End Date : <h:outputText value="#{item.endDate}"><f:convertDateTime pattern = "MMM,dd yyyy" /></h:outputText>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-12 col-12">
+                                                                        <div class="img_box_one text-left">
+                                                                            <c:if test="#{param['Status'] eq 'over'}">
+                                                                                <h:button value="WINNER"  class="btn btn-primary"  style="width: 500px"></h:button>
+                                                                            </c:if>
+                                                                            <c:if test="#{param['Status'] eq 'upcoming'}">
+                                                                                <h:button value="REGISTRATION"  class="btn btn-primary"  style="width: 500px" disabled="true"></h:button>
+                                                                            </c:if>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    =================== services boxes end here  ====================
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-5 img_section" style="background-image: url('Upload/Contest/#{item.contestPhotoPath}');"></div>
+                                                    <div class="col-md-12 col-12" style="height: 20px"></div>
+                                                </ui:repeat>
+                                            </c:if>
+                                        <!--</div>-->
+
+
+
+                                    </div>
+                                    <!--=================== image card end here ====================-->
+
+                                </div>
+                            </div>
+
+                            <!--=================== content body end ====================-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>       
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="Include/Footer.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>
+

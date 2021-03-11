@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Image Of The Week</title>
+    </h:head>
+    <h:body onload="myFunction()">
+
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="Include/header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div id = "cupcake" class = "box">
+            <span class = "letter">D</span>
+
+            <div class = "cupcakeCircle box">
+                <div class = "cupcakeInner box">
+                    <div class = "cupcakeCore box"></div>
+
+                </div></div>
+
+            <span class = "letter box">W</span>
+        </div>
+
+        <div id="myDiv">
+            <!-- Sidebar/menu -->
+            <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br />
+                <h3 class="w3-padding-64 w3-center">
+                    <div id = "cupcake" class = "box">
+                        <span class = "letter" style="font-size: 60px">D</span>
+
+                        <div class = "cupcakeCircle box" style="height: 60px;width: 60px;">
+                            <div class = "cupcakeInner box">
+                                <div class = "cupcakeCore box"></div>
+
+                            </div>
+                        </div>
+                        <span class = "letter box" style="font-size: 60px">W</span>
+                    </div>
+                </h3>
+                <h:form>
+                    <p:commandLink value="Logout" action="#{loginBean.logout()}" />
+                </h:form>
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+                <a href="index.xhtml" class="w3-bar-item w3-button">Home</a>
+                <a href="" class="w3-bar-item w3-button">User</a>
+                <a href="photocategory.xhtml" class="w3-bar-item w3-button">Category</a>
+                <a href="contest.xhtml" class="w3-bar-item w3-button">Contest</a>
+                <a href="plans.xhtml" class="w3-bar-item w3-button">Plans</a>
+                <a href="photographeroftheweek.xhtml" class="w3-bar-item w3-button">Image Of Week</a>
+                <a href="tips.xhtml" class="w3-bar-item w3-button">Tips</a>
+
+
+                <!--<a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>-->
+            </nav>
+
+            <!-- Top menu on small screens -->
+            <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+                <span class="w3-left w3-padding"><img src="DOW1.png" height="200px" width="250px" /></span>
+                <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+            </header>
+
+            <!-- Overlay effect when opening sidebar on small screens -->
+            <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+            <!-- !PAGE CONTENT! -->
+            <div class="w3-main" style="margin-left:300px">
+
+                <p:dialog header="Add/Update Image Of the Week" widgetVar="dlg1" modal="true" id="popupdlg">
+                    <!--                        <p:ajax event="close" update="popupdlg"/>-->
+                    <p:ajax event="close" update="popupdlg"  listener="#{photographeroftheweekBean.reset()}" />
+                    <h:form id="popupform" enctype="multipart/form-data">
+
+                        <p:outputPanel id="imageoftheweekform">
+
+                            <p:panelGrid rendered="#{photographeroftheweekBean.imageoftheWeekId eq '0'}" columnClasses="label,value">
+                                <h:inputHidden value="#{photographeroftheweekBean.imageoftheWeekId}" />
+                                
+                                <p:row>
+                                    <p:column><p:outputLabel value="Social Profile URL: " for="socialprofile" /></p:column>
+                                    <p:column><p:inputText id="socialprofile" value="#{photographeroftheweekBean.socialProfileUrl}" style="width:100%"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Social Photo URL : " for="socialphoto" /></p:column>
+                                    <p:column><p:inputText id="socialphoto" value="#{photographeroftheweekBean.socialPhotoUrl}" style="width:100%"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Description : " for="description" /></p:column>
+                                    <p:column><p:inputTextarea rows="4" cols="30" id="description" value="#{photographeroftheweekBean.imageDescription}" title="description" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Image:" for="imageofweekImage"/></p:column>
+                                    <p:column><p:fileUpload mode="simple" id="imageofweekImage" value="#{photographeroftheweekBean.file}" style="width:100%"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2"><p:commandButton ajax="false" value="Submit" action="#{photographeroftheweekBean.addImageOftheWeek()}" style="margin-right: 340px;" /></p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+
+                            <p:panelGrid rendered="#{photographeroftheweekBean.imageoftheWeekId gt 0}" >
+
+                                <h:inputText value="#{photographeroftheweekBean.imageoftheWeekId}" />
+                                
+                                
+                                <p:row>
+                                    <p:column><p:outputLabel value="Social Profile URL: " for="socialprofileedit" /></p:column>
+                                    <p:column><p:inputText id="socialprofileedit" value="#{photographeroftheweekBean.socialProfileUrl}" style="width:100%"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Social Photo URL : " for="socialphotoedit" /></p:column>
+                                    <p:column><p:inputText id="socialphotoedit" value="#{photographeroftheweekBean.socialPhotoUrl}" style="width:100%"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Description : " for="descriptionedit" /></p:column>
+                                    <p:column><p:inputTextarea rows="4" cols="30" id="descriptionedit" value="#{photographeroftheweekBean.imageDescription}" title="description" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Image:" for="imageofweekImageedit"/></p:column>
+                                    <p:column><p:fileUpload mode="simple" id="imageofweekImageedit" value="#{photographeroftheweekBean.file}"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2" >
+                                        <p:commandButton value="Update" style="float: left;"  action="#{photographeroftheweekBean.UpdateImageOfWeek()}" />
+<!--                                        onclick="PF('dlg1').hide()"
+                                            <f:ajax listener="" />
+                                        </p:commandButton>-->
+                                            
+                                        <p:commandButton value="Delete" style="float: left;" action="#{photographeroftheweekBean.deleteImageOfWeek(photographeroftheweekBean.imageoftheWeekId)}" ajax="false" />
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:outputPanel>                            
+                    </h:form>
+                </p:dialog>
+
+
+                <h:form>
+                    <p:commandButton value="Add" type="button" onclick="PF('dlg1').show();" style="float: left;margin-top: 30px;margin-bottom: 10px"/>
+
+                    <p:repeat value="#{photographeroftheweekBean.getAllImageoftheweekData()}" var="item">
+                        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                            <p:commandLink update="" oncomplete="">
+                                <p:graphicImage value="../User/Upload/ImageOfWeek/#{item.imageOfWeekPhotoPath}" style="max-width: 300px;max-height: 200px; float: left;"/> 
+                            </p:commandLink>
+
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="PhotoGrapher Name :" />
+                                    <h:outputText value="#{item.socialProfileUrl}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Photo On Instagram :" />
+                                    <h:outputText value="#{item.socialPhotoUrl}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Description :" />
+                                    <h:outputText value="#{item.imageDescription}" style="font-weight: bold"/>
+                                    
+                                    <h:outputText value="Declaration Date :" />
+                                    <h:outputText value="#{item.declarationDate}" style="font-weight: bold"/>
+
+                                    <p:commandButton value="Select" action="#{photographeroftheweekBean.getImageofweekById(item.imageOfWeekId)}" update=":popupform:imageoftheweekform" onclick="PF('dlg1').show();" />
+                                    
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                        <hr />
+                    </p:repeat>
+                </h:form>
+
+            </div>
+        </div>
+
+        <script>
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+                document.getElementById("cupcake").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="Include/footer.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>
+

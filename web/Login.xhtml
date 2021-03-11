@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Login</title>
+        <link href="login.css" rel="stylesheet" type="text/css"/>
+
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+
+                <div class="vid-container">
+                    <img src="User/Upload/Camera.jpg" alt="" height="100%" width="100%"/>
+                    <div class="inner-container">
+                        <!--                <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop="true">
+                                            <source src="https://mazwai.com/videvo_files/video/free/2015-09/small_watermarked/postcard_from_big_sur_preview.webm?random=1" type="video/webm" />
+                                        </video>-->
+                        <img src="User/Upload/Camera.jpg" alt="" height="100%" width="100%"  class="bgvid inner"/>
+                        <div class="box">
+                            <h1>Login</h1>
+                            <h:inputText id="txtemail" value="#{loginBean.emailid}" a:placeholder="EmailId"/>
+
+                            <h:inputSecret id="txtpass" value="#{loginBean.password}"  a:placeholder="Password"/>
+
+                            <h:commandButton value="Login" style="background:#2ecc71;" action="#{loginBean.login()}"></h:commandButton>
+                            
+                            <p>Not a member? <a href="Registration.xhtml" style="color: white">Sign Up</a></p>
+                            
+                            <h:outputLabel id="message" value="#{loginBEAN.message}"/>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>
+

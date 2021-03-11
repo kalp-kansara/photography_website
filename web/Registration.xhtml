@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href="login.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form enctype="multipart/form-data">
+                <div class="vid-container">
+                    <img src="User/Upload/Camera.jpg" alt="" height="100%" width="100%"/>
+                    <div class="inner-container" style="height: 680px;top: calc(50vh - 351px);">
+                        <!--                <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop="true">
+                                            <source src="https://mazwai.com/videvo_files/video/free/2015-09/small_watermarked/postcard_from_big_sur_preview.webm?random=1" type="video/webm" />
+                                        </video>-->
+                        <img src="User/Upload/Camera.jpg" alt="" height="100%" width="100%"  class="bgvid inner"/>
+                        <div class="box">
+                            <h1>REGISTRATION</h1>
+                            <table>
+                                <tr style="margin: -20px 45px; display: block;">
+                                    <td><h:inputText  a:placeholder="First Name" style="width: 100px" value="#{registrationBEAN.firstName}"/></td>
+                                    <td><h:inputText a:placeholder="Middle Name" style="width: 100px" value="#{registrationBEAN.middleName}"/></td>
+                                    <td><h:inputText  a:placeholder="Last Name" style="width: 100px" value="#{registrationBEAN.lastName}"/></td>
+                                </tr>
+                                <tr >
+                                    <td><h:inputText a:placeholder="Email-Id" style="width: 310px;margin-top: 5px;" value="#{registrationBEAN.emailId}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:inputSecret a:placeholder="Password" style="width: 310px;margin-top: 5px;" value="#{registrationBEAN.password}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:inputFile style="width: 310px;margin-top: 5px;" value="#{registrationBEAN.file}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:inputText a:placeholder = "Social Site Profile URL" style="width: 310px;margin-top: 5px;" value="#{registrationBEAN.userProfileURL}"/></td>
+                                </tr>
+                            </table>
+
+
+                            <h:commandButton style="width: 310px;margin: 20px auto 0px 46px;background:#2ecc71;" value="REGISTER" action="#{registrationBEAN.registration()}"></h:commandButton>
+                            <p>Already a member? <a href="Login.xhtml" style="color: white">Sign In</a></p>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Contest</title>
+    </h:head>
+    <h:body onload="myFunction()">
+
+        <style>
+            .ui-inputfield 
+            {
+                width: 95%;
+            }
+        </style>
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="Include/header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div id = "cupcake" class = "box">
+            <span class = "letter">D</span>
+
+            <div class = "cupcakeCircle box">
+                <div class = "cupcakeInner box">
+                    <div class = "cupcakeCore box"></div>
+
+                </div></div>
+
+            <span class = "letter box">W</span>
+        </div>
+
+        <div id="myDiv">
+            <!-- Sidebar/menu -->
+            <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br />
+                <h3 class="w3-padding-64 w3-center">
+                    <div id = "cupcake" class = "box">
+                        <span class = "letter" style="font-size: 60px">D</span>
+
+                        <div class = "cupcakeCircle box" style="height: 60px;width: 60px;">
+                            <div class = "cupcakeInner box">
+                                <div class = "cupcakeCore box"></div>
+
+                            </div>
+                        </div>
+                        <span class = "letter box" style="font-size: 60px">W</span>
+                    </div>
+                </h3>
+                <h:form>
+                    <p:commandLink value="Logout" action="#{loginBean.logout()}" />
+                </h:form>
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+                <a href="index.xhtml" class="w3-bar-item w3-button">Home</a>
+                <a href="" class="w3-bar-item w3-button">User</a>
+                <a href="photocategory.xhtml" class="w3-bar-item w3-button">Category</a>
+                <a href="contest.xhtml" class="w3-bar-item w3-button">Contest</a>
+                <a href="plans.xhtml" class="w3-bar-item w3-button">Plans</a>
+                <a href="photographeroftheweek.xhtml" class="w3-bar-item w3-button">Image Of Week</a>
+                <a href="tips.xhtml" class="w3-bar-item w3-button">Tips</a>
+
+                <!--<a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>-->
+            </nav>
+
+            <!-- Top menu on small screens -->
+            <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+                <span class="w3-left w3-padding"><img src="DOW1.png" height="200px" width="250px" /></span>
+                <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+            </header>
+
+            <!-- Overlay effect when opening sidebar on small screens -->
+            <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+            <!-- !PAGE CONTENT! -->
+            <div class="w3-main" style="margin-left:300px">
+
+                <p:dialog header="Add/Edit Contest" widgetVar="dlg1" modal="true" id="popupdlg" position="center top">
+                    <p:ajax event="close" update="popupdlg"  listener="#{contestBEAN.reset()}" />
+                    <h:form id="popupform" enctype="multipart/form-data">
+                        <p:outputPanel id="contestform">
+                            <p:panelGrid rendered="#{contestBEAN.contestId eq '0'}" columnClasses="label,value">
+                                <h:inputText value="#{contestBEAN.contestId}" />
+                                <p:row>
+                                    <p:column><p:outputLabel for="contestname" value="Contest Name : " style="float: left" /></p:column>
+                                    <p:column><p:inputText id="contestname" value="#{contestBEAN.contestName}" style="width: 100%;"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="contesttype" value="Contest Type : " style="float: left"/></p:column>
+                                    <p:column><p:selectOneMenu id="contesttype" value="#{contestBEAN.contestType}" style="width: 100%;">
+                                            <f:selectItem itemLabel="Select Any One" itemValue="" />
+                                            <f:selectItem itemLabel="Votting Based Paid" itemValue="Votting Based Paid"/>
+                                            <f:selectItem itemLabel="Votting Based Unpaid" itemValue="Votting Based Unpaid"/>
+                                            <!--                                    <f:selectItem itemLabel="Judge Based Paid" itemValue="Judge Based Paid"/>
+                                                                                <f:selectItem itemLabel="Judge Based Unpaid" itemValue="Judge Based Unpaid" />-->
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="startdate" value="Start Date : " style="float: left"/></p:column>
+                                    <p:column><p:datePicker id="startdate" value="#{contestBEAN.startDate}" pattern="dd/MM/yyyy" showIcon="true" readonlyInput="true" style="width: 100%;"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="enddate" value="End Date : " style="float: left" /></p:column>
+                                    <p:column><p:datePicker id="enddate" value="#{contestBEAN.endDate}" pattern="dd/MM/yyyy" showIcon="true" readonlyInput="true" style="width: 100%;" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="description" value="Description : " style="float: left" /></p:column>
+                                    <p:column><p:editor id="description" widgetVar="description" value="#{contestBEAN.contestDescription}" width="600" style="margin-top: 20px;width: 100%" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="conteststatus" value="Contest Status : " style="float: left"/></p:column>
+                                    <p:column><p:selectOneMenu id="conteststatus" value="#{contestBEAN.status}" style="width: 100%;">
+                                            <f:selectItem itemLabel="Select Any One" itemValue="" />
+                                            <f:selectItem itemLabel="Cancle" itemValue="Cancle"/>
+                                            <f:selectItem itemLabel="Over" itemValue="Over"/>
+                                            <f:selectItem itemLabel="Upcomming" itemValue="Upcomming"/>
+                                            <f:selectItem itemLabel="Running On" itemValue="Running On" noSelectionOption="true"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column> <p:outputLabel value="Contest Image : " for="contestimage" style="float:left"/></p:column>
+                                    <p:column><p:fileUpload mode="simple" id="contestimage" value="#{contestBEAN.file}"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2"><p:commandButton ajax="false" value="Submit" action="#{contestBEAN.addContest()}" /></p:column>
+                                </p:row>
+                            </p:panelGrid>
+
+                            <p:panelGrid rendered="#{contestBEAN.contestId gt 0}" columnClasses="label,value">
+
+                                <h:inputText value="#{contestBEAN.contestId}" />
+                                <p:row>
+                                    <p:column><p:outputLabel for="contestnameedit" value="Contest Name : " style="float: left" /></p:column>
+                                    <p:column><p:inputText id="contestnameedit" value="#{contestBEAN.contestName}" style="width: 100%;"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="contesttypeedit" value="Contest Type : " style="float: left"/></p:column>
+                                    <p:column><p:selectOneMenu id="contesttypeedit" value="#{contestBEAN.contestType}" style="width: 100%;">
+                                            <f:selectItem itemLabel="Select Any One" itemValue="" />
+                                            <f:selectItem itemLabel="Votting Based Paid" itemValue="Votting Based Paid"/>
+                                            <f:selectItem itemLabel="Votting Based Unpaid" itemValue="Votting Based Unpaid"/>
+                                            <!--                                    <f:selectItem itemLabel="Judge Based Paid" itemValue="Judge Based Paid"/>
+                                                                                <f:selectItem itemLabel="Judge Based Unpaid" itemValue="Judge Based Unpaid" />-->
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="startdateedit" value="Start Date : " style="float: left"/></p:column>
+                                    <p:column><p:datePicker id="startdateedit" value="#{contestBEAN.startDate}" pattern="dd/MM/yyyy" showIcon="true" readonlyInput="true" style="width: 100%;"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="enddateedit" value="End Date : " style="float: left" /></p:column>
+                                    <p:column><p:datePicker id="enddateedit" value="#{contestBEAN.endDate}" pattern="dd/MM/yyyy" showIcon="true" readonlyInput="true" style="width: 100%;" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="descriptionedit" value="Description : " style="float: left" /></p:column>
+                                    <p:column><p:editor id="descriptionedit" widgetVar="description" value="#{contestBEAN.contestDescription}" width="600" style="margin-top: 20px;width: 100%" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel for="conteststatusedit" value="Contest Status : " style="float: left"/></p:column>
+                                    <p:column><p:selectOneMenu id="conteststatusedit" value="#{contestBEAN.status}" style="width: 100%;">
+                                            <f:selectItem itemLabel="Select Any One" itemValue="" />
+                                            <f:selectItem itemLabel="Cancle" itemValue="Cancle"/>
+                                            <f:selectItem itemLabel="Over" itemValue="Over"/>
+                                            <f:selectItem itemLabel="Upcomming" itemValue="Upcomming"/>
+                                            <f:selectItem itemLabel="Running On" itemValue="Running On" noSelectionOption="true"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column> <p:outputLabel value="Contest Image : " for="contestimageedit" style="float:left"/></p:column>
+                                    <p:column><p:fileUpload mode="simple" id="contestimageedit" value="#{contestBEAN.file}"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:commandButton ajax="false" value="Update" action="#{contestBEAN.updateContestData()}" style="float: left"/>
+                                        <p:commandButton ajax="false" value="Delete" action="#{contestBEAN.deletecontestData(contestBEAN.contestId)}" style="float: left"/>                
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </h:form>
+                </p:dialog>
+
+                <h:form>
+                    <p:commandButton value="Add" type="button" onclick="PF('dlg1').show();" style="margin-right: 1170px;margin-top: 30px;margin-bottom: 10px"/>
+                    
+                    <p:repeat value="#{contestBEAN.getallcontestdata()}" var="contest">
+                        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                            <p:commandLink update="" oncomplete="">
+                                <p:graphicImage value="../User/Upload/Contest/#{contest.contestPhotoPath}" style="max-width: 590px;max-height: 410px;"/> 
+                            </p:commandLink>
+
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Contest Name :" />
+                                    <h:outputText value="#{contest.contestName}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Contest Type :" />
+                                    <h:outputText value="#{contest.contestType}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Date :" />
+                                    <h:outputText value="#{contest.startDate} to #{contest.endDate}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Status :" />
+                                    <h:outputText value="#{contest.contestStatus}" style="font-weight: bold"/>
+
+                                    <p:commandButton value="Terms and Condition" action="#{contestBEAN.getDescriptionById(contest.contestId)}" update=":popupformtnc" onclick="PF('dlg2').show();" />
+                                    <p:commandButton value="Select" action="#{contestBEAN.getDataById(contest.contestId)}" update=":popupform:contestform" onclick="PF('dlg1').show();" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                        <hr />
+                    </p:repeat>
+                </h:form>
+
+                <p:dialog header="Terms and Condition" widgetVar="dlg2" modal="true" id="popupdlgtnc" position="center center">
+                    <p:ajax event="close" update="popupdlgtnc"  listener="#{portfolioBEAN.reset}" />
+                    <h:form id="popupformtnc" enctype="multipart/form-data">
+                        <div class="ui-fluid">
+                            <div class="p-field">
+                                <p:editor id="description" widgetVar="description" value="#{contestBEAN.contestDescription}" width="600" style="margin-top: 20px" disabled="true"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+                <!-- End page content -->
+            </div>
+        </div>
+
+        <script>
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+                document.getElementById("cupcake").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="Include/footer.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>
+
+
+

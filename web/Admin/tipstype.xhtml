@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tips</title>
+        <f:metadata>
+            <f:viewParam name="id" value="#{photographyTipsBean.tipsTypeId}"></f:viewParam>
+        </f:metadata>
+    </h:head>
+
+    <h:body onload="myFunction()">
+
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="Include/header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div id = "cupcake" class = "box">
+            <span class = "letter">D</span>
+
+            <div class = "cupcakeCircle box">
+                <div class = "cupcakeInner box">
+                    <div class = "cupcakeCore box"></div>
+
+                </div></div>
+
+            <span class = "letter box">W</span>
+        </div>
+
+        <div id="myDiv">
+            <!-- Sidebar/menu -->
+            <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br />
+                <h3 class="w3-padding-64 w3-center">
+                    <div id = "cupcake" class = "box">
+                        <span class = "letter" style="font-size: 60px">D</span>
+
+                        <div class = "cupcakeCircle box" style="height: 60px;width: 60px;">
+                            <div class = "cupcakeInner box">
+                                <div class = "cupcakeCore box"></div>
+
+                            </div>
+                        </div>
+                        <span class = "letter box" style="font-size: 60px">W</span>
+                    </div>
+                </h3>
+                <h:form>
+                    <p:commandLink value="Logout" action="#{loginBean.logout()}" />
+                </h:form>
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+                <a href="index.xhtml" class="w3-bar-item w3-button">Home</a>
+                <a href="" class="w3-bar-item w3-button">User</a>
+                <a href="photocategory.xhtml" class="w3-bar-item w3-button">Category</a>
+                <a href="contest.xhtml" class="w3-bar-item w3-button">Contest</a>
+                <a href="plans.xhtml" class="w3-bar-item w3-button">Plans</a>
+                <a href="photographerofweek.xhtml" class="w3-bar-item w3-button">Image Of Week</a>
+                <a href="tips.xhtml" class="w3-bar-item w3-button">Tips</a>
+
+
+                <!--<a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>-->
+            </nav>
+
+            <!-- Top menu on small screens -->
+            <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+                <span class="w3-left w3-padding"><img src="DOW1.png" height="200px" width="250px" /></span>
+                <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+            </header>
+
+            <!-- Overlay effect when opening sidebar on small screens -->
+            <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+            <!-- !PAGE CONTENT! -->
+            <div class="w3-main" style="margin-left:300px">
+                
+                <f:view>
+                    <p:dialog header="Add/Update Tips" widgetVar="dlg1" modal="true" id="popupdlg">
+                        <!--                        <p:ajax event="close" update="popupdlg"/>-->
+                        <p:ajax event="close" update="popupdlg"  listener="#{tipsBean.reset()}" />
+                        <h:form id="popupform" enctype="multipart/form-data">
+
+                            <p:outputPanel id="tipsform">
+
+                                <p:panelGrid rendered="#{photographyTipsBean.photographyTipsId eq '0'}" columnClasses="label,value">
+                                    <h:inputHidden value="#{photographyTipsBean.photographyTipsId}" />
+                                    <h:inputHidden value="#{photographyTipsBean.tipsTypeId}" />
+                                    
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Description:" for="description" /></p:column>
+                                        <p:column><p:inputTextarea rows="4" cols="30" id="description" value="#{photographyTipsBean.photographyTipsDescription}" title="description" /></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Tips Image:" for="tipsImage"/></p:column>
+                                        <p:column><p:fileUpload mode="simple" id="tipsImage" value="#{photographyTipsBean.file}"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"><p:commandButton value="Submit" action="#{photographyTipsBean.AddPhotographyTips()}" style="margin-right: 340px;" ajax="false" /></p:column>
+                                    </p:row>
+
+                                </p:panelGrid>
+
+                                <p:panelGrid rendered="#{photographyTipsBean.photographyTipsId gt 0}" >
+
+                                    <h:inputHidden value="#{photographyTipsBean.photographyTipsId}" />
+                                    <h:inputHidden value="#{photographyTipsBean.tipsTypeId}" />
+                                    
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Description:" for="descriptionedit" /></p:column>
+                                        <p:column><p:inputTextarea rows="4" cols="30" id="descriptionedit" value="#{photographyTipsBean.photographyTipsDescription}" title="description" /></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Tips Image:" for="tipsImageedit"/></p:column>
+                                        <p:column><p:fileUpload mode="simple" id="tipsImageedit" value="#{photographyTipsBean.file}"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" >
+                                            <p:commandButton value="Update" style="float: left;" ajax="false" />
+                                            <p:commandButton value="Delete" style="float: left;"  ajax="false" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+
+                            </p:outputPanel>                            
+                        </h:form>
+
+                    </p:dialog>
+                    <!--</h:panelGroup>-->
+
+                    <h:form id="gridform" class="container">
+                        <p:commandButton value="Add" type="button" onclick="PF('dlg1').show();" style="margin-right: 1170px;margin-top: 30px;margin-bottom: 10px"/>
+                        <p:repeat value="#{photographyTipsBean.getAllTips()}" var="contest">
+                        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                            <p:commandLink update="" oncomplete="">
+                                <p:graphicImage value="../User/Upload/photographyTips/#{photographyTipsBean.photographyTipsPhotoPath}" style="max-width: 590px;max-height: 410px;"/> 
+                            </p:commandLink>
+
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="#{photographyTipsBean.photographyTipsDescription}" style="font-weight: bold"/>
+
+                                    <p:commandButton value="Select" update=":popupform:tipsform" onclick="PF('dlg1').show();" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                        <hr />
+                    </p:repeat>
+                    </h:form>
+                </f:view>
+
+            </div>
+        </div>
+
+        <script>
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+                document.getElementById("cupcake").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="Include/footer.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>
+
